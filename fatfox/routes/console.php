@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use App\Jobs\DownloadUsers;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,14 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+Artisan::command('delete', function () {
+    \App\Models\RandomUser::truncate();
+})->purpose('Display an inspiring quote');
+
+Artisan::command('download', function () {
+    for ($i = 1; $i <= 83; $i++) {
+        dump($i . " thousand");
+        dispatch(new DownloadUsers(1000));
+    }
+});
