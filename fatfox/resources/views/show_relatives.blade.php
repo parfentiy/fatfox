@@ -1,3 +1,6 @@
+<?php
+    header('Content-type: text/html; charset=utf-8');
+?>
 <table  style="border: 1px solid white; border-collapse: collapse">
     <tr>
         <th style="border: 1px solid; padding: 3px;">#</th>
