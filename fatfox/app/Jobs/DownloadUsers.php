@@ -31,7 +31,6 @@ class DownloadUsers implements ShouldQueue
         //
         $dataset = json_decode(file_get_contents("https://randomuser.me/api/?results=" . $this->count));
         foreach ($dataset->results as $item) {
-            dump($item->name->last);
             \DB::table("random_users")->insert([
                 'gender' => json_encode($item->gender),
                 'name_title' => json_encode($item->name->title),
