@@ -24,8 +24,26 @@ Artisan::command('delete', function () {
 })->purpose('Display an inspiring quote');
 
 Artisan::command('download {thousands}', function ($thousands) {
-    for ($i = 1; $i <= $thousands; $i++) {
-        echo "Загрузка " . $i . "-й тысячи записей" . '<br>';
-        dispatch(new DownloadUsers(1000));
+    if ($thousands > 10) {
+        $decades = (int) round($thousands / 10, 0);
+        $remain = $thousands % 10;
+        $total = 0;
+        for ($y = 1; $y < $decades; $y++) {
+            for ($i = 1; $i <= 10; $i++) {
+                $total++;
+                echo "Загрузка " . $total . "-й тысячи записей" . '<br>';
+                dispatch(new DownloadUsers(1000));
+            }
+        }
+        for ($i = 1; $i <= $remain; $i++) {
+            $total++;
+            echo "Загрузка " . $total . "-й тысячи записей" . '<br>';
+            dispatch(new DownloadUsers(1000));
+        }
+    } else {
+        for ($i = 1; $i <= $thousands; $i++) {
+            echo "Загрузка " . $i . "-й тысячи записей" . '<br>';
+            dispatch(new DownloadUsers(1000));
+        }
     }
 });
