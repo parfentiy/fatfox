@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/show', [RandomUserController::class, 'showRelatives']);
+Route::get('/download/{thousands}', [RandomUserController::class, 'download']);

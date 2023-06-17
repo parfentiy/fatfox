@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\DB;
 class RandomUserController extends Controller
 {
     //
+    public function download($thousands) {
+        \Artisan::call('download ' . $thousands);
+    }
     public function showRelatives() {
         $t1 = microtime(true);
         $relatives = \DB::table('random_users')

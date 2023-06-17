@@ -23,9 +23,9 @@ Artisan::command('delete', function () {
     \App\Models\RandomUser::truncate();
 })->purpose('Display an inspiring quote');
 
-Artisan::command('download', function () {
-    for ($i = 1; $i <= 83; $i++) {
-        dump($i . " thousand");
+Artisan::command('download {thousands}', function ($thousands) {
+    for ($i = 1; $i <= $thousands; $i++) {
+        echo "Загрузка " . $i . "-й тысячи записей" . '<br>';
         dispatch(new DownloadUsers(1000));
     }
 });
