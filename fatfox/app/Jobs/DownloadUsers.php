@@ -28,9 +28,13 @@ class DownloadUsers implements ShouldQueue
      */
     public function handle(): void
     {
-        //
+        // fixme - допустимо использовать file_get_contents в конкретно этом частном случае,
+        // но будь здесь авторизация или будь это POST запросом, понадобилось бы иное решение.
+        // Т.к. здесь и так Laravel, то очень к месту использование Guzzle Http библиотеки - самое
+        // распространенное решение, отвечающее PSR стандартам и позволяющее делать сложные запросы легко.
         $dataset = json_decode(file_get_contents("https://randomuser.me/api/?nat=gb&results=" . $this->count));
         foreach ($dataset->results as $item) {
+            // fixme - энкодинг обратно в для отправки в БД json не требуется. Похоже, из-за этого слетели некоторые имена, превратившись в коды симоволов
             \DB::table("random_users")->insert([
                 'gender' => json_encode($item->gender),
                 'name_title' => json_encode($item->name->title),
