@@ -29,7 +29,7 @@ class DownloadUsers implements ShouldQueue
     public function handle(): void
     {
         //
-        $dataset = json_decode(file_get_contents("https://randomuser.me/api/?results=" . $this->count));
+        $dataset = json_decode(file_get_contents("https://randomuser.me/api/?nat=gb&results=" . $this->count));
         foreach ($dataset->results as $item) {
             \DB::table("random_users")->insert([
                 'gender' => json_encode($item->gender),
